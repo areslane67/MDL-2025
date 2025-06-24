@@ -28,27 +28,6 @@ button, #ex{
     width: 100%;
     color: white;
 }
-main section p.vert,p.rouge{
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 9rem;
-    border-radius: .7rem;
-    overflow: hidden;
-    opacity: 0;
-    transition: .5s;
-
-}
-main section:hover p.vert{
-    background-color: green;
-    opacity: .6;
-    transition: .5s;
-}
-main section:hover p.rouge{
-    background-color: red;
-    opacity: .6;
-    transition: .5s;
-}
 
 /* header */
 
@@ -97,8 +76,6 @@ header div img.top{
     border-radius: 20rem;
     width: 6rem;
     height: 6rem;
-    cursor: pointer;
-
 }
 header a.Liste{
     padding: 0rem 2rem;

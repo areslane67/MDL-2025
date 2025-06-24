@@ -18,7 +18,7 @@
 <body>
     <header>
         <div>
-            <a href=""><img class="yes" src="./asset/1904668-connection-document-file-media-network-share-social_122517.png" alt="img">Internet</a>
+            <a href="./inscription.php"><img class="yes" src="./asset/1904668-connection-document-file-media-network-share-social_122517.png" alt="img">Internet</a>
         </div>
         <div>
             <a href="" class="co"><img class="yes" src="./asset/door_direction_arrow_out_log_exit_icon_232679.png" alt="">Connection</a>

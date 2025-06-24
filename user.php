@@ -4,11 +4,7 @@
     include_once("./src/session.php");
 
 
-    if (!isset($_SESSION['nom']) || !isset($_SESSION['URL'])) {
-        // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
-        header("Location: connexion.php");
-        exit;
-    }
+
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +40,6 @@
             $user = $user->fetch();
             include_once("./src/update.php");
 
-            
-
                     $date = $user['Birthdate'];
                     $date_format = date('F jS', strtotime($date));
                     $user['mois'] = $date_format;
@@ -63,24 +57,35 @@
                         $color = 'rouge'; // assign red color to administrators
                       }
 
+                      if (isset($_POST['delete'])) {
+                        $sql = "DELETE FROM inscription WHERE id=:id";
+                        $stmt = $_bdd->prepare($sql);
+                        $stmt->bindParam(':id', $user['id'], PDO::PARAM_INT);
+                        if ($stmt->execute()) {
+                            header("Location: liste.php");
+                            exit;
+                        } else {
+                            echo "Erreur lors de la suppression des données utilisateur.";
+                        }
+                    }
 
                 echo "
-                <section data-uid=" . $_SESSION['id'] . ">
+                <section data-uid=" . $user['id'] . ">
                 <div class=\"left\">
-                <img src=\"" . $_SESSION['URL'] . "\" class=\"zeb\">
+                <img src=\"" . $user['URL'] . "\" class=\"zeb\">
                 </div>
 
                 <div>
                 <ul class=\"right\" >
 
-                <li> <p class=\"nom\">" . $_SESSION['nom'] . " " . $_SESSION['prenom'] . "</p><p class=\"age\">(" . $_SESSION['age'] . " ans) </p> </li>
-                <li> <p class=\"pays\">". $_SESSION['Ville'] .",". $_SESSION['Pays']."</p> </li>
-                <li> <img src=\"./asset/message_mail_email_envelope_icon_220571.png\" class=\"mail\"> <p>".$_SESSION['mail']."</p> </li>
-                <li> <img src=\"./asset/phone-handset_icon-icons.com_48252.png\" class=\"phone\"> <p>".$_SESSION['tel']."</p> </li>
-                <li> <img src=\"./asset/birthdaycakewithcandles_79795.png\" class=\"an\"> <p>".$_SESSION['mois']."</p> </li>
+                <li> <p class=\"nom\">" . $user['nom'] . " " . $user['prenom'] . "</p><p class=\"age\">(" . $user['age'] . " ans) </p> </li>
+                <li> <p class=\"pays\">". $user['Ville'] .",". $user['Pays']."</p> </li>
+                <li> <img src=\"./asset/message_mail_email_envelope_icon_220571.png\" class=\"mail\"> <p>".$user['mail']."</p> </li>
+                <li> <img src=\"./asset/phone-handset_icon-icons.com_48252.png\" class=\"phone\"> <p>".$user['tel']."</p> </li>
+                <li> <img src=\"./asset/birthdaycakewithcandles_79795.png\" class=\"an\"> <p>".$user['mois']."</p> </li>
                 
                 </ul>
-                <p class=\"$color\" id=\"zeb\">". $_SESSION['Categorie'] ."</p>
+                <p class=\"$color\" id=\"zeb\">". $user['Categorie'] ."</p>
                 </div>
                 </section>
 
@@ -128,7 +133,21 @@
                 <input type="url" id="URL" name="URL" placeholder="URL" required>
             </label>
     <input type="submit" name="submit" value="Modifier les informations" id="ex">
+    <button id="openModalBtn">Delete</button>
 </form>
+
+  
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Etes vous sure de vouloir supprimer cette utilisateur ?</h2>
+        <form method="POST" action="">
+            <input type="submit" name="delete" value="Delete" class="byebye">
+        </form>
+    </div>
+  </div>
+
+
 
 
                     </div>

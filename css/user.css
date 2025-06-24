@@ -71,4 +71,6 @@ main ul li p.pays{
     margin: 1rem 0rem;
     color: grey;
 }
-
+main div{
+    margin: 1rem auto;
+}

@@ -59,7 +59,7 @@ if (isset($_GET['sort'])) {
         </div>
         <div>
         <a href="./liste.php" class="Liste" id="Liste"><img class="yes" src="./asset/list-symbol-of-three-items-with-dots_icon-icons.com_72994.png" alt="img">Liste</a>
-        <?php echo '<img data-uid="' . $_SESSION['id'] . '" src="' . $_SESSION['URL'] . '" class="top">'?>
+        <a href="./connected.php"><?php echo '<img src="' . $_SESSION['URL'] . '" class="top">'?></a>
         <a href="./src/deconnexion.php" class="right"><img class="yes" src="./asset/door_direction_arrow_out_log_exit_icon_232679.png" alt="">Déconnexion</a>
         </div>   
     </header>
@@ -113,7 +113,7 @@ if (isset($_GET['sort'])) {
                 }
 
                 echo "
-                <section>
+                <section data-uid=" . $user['id'] . ">
                 <div class=\"left\">
                 <img src=\"" . $user['URL'] . "\" class=\"zeb\">
                 </div>
