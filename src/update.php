@@ -25,7 +25,8 @@ if(isset($_POST['submit'])) {
         mysqli_stmt_execute($req);
 
         if(mysqli_affected_rows($connexion) > 0) {
-            echo header("Location: ../mdl2/liste.php");
+            header("Location: ../MDL-2025/connected.php");
+            exit;
         } else {
             echo "Erreur lors de la mise à jour des informations de l'utilisateur.";
         }
